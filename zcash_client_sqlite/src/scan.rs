@@ -414,7 +414,7 @@ pub fn decrypt_and_store_transaction<P: AsRef<Path>>(
     // First try update an existing transaction in the database.
     let txid = tx.txid().0.to_vec();
     let mut raw_tx = vec![];
-    //tx.write(&mut raw_tx)?;
+    tx.write(&mut raw_tx)?;
     let tx_row = if stmt_update_tx.execute(&[
         tx.expiry_height.to_sql()?,
         raw_tx.to_sql()?,
