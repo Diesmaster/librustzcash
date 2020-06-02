@@ -162,6 +162,12 @@ impl Transaction {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "this is the called function",
+        ));
+
+
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
         let version = header & 0x7FFFFFFF;
