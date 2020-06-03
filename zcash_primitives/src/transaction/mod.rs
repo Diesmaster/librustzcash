@@ -186,7 +186,7 @@ impl Transaction {
             ));
         }
 
-        let vin; // = Vector::read(&mut reader, TxIn::read)?;
+        let vin = Vector::read(&mut reader, TxIn::read)?;
         let vout = Vector::read(&mut reader, TxOut::read)?;
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
