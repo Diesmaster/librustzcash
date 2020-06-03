@@ -186,6 +186,11 @@ impl Transaction {
             ));
         }
 
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "BIG OOF",
+        ));
+
         let vin = Vector::read(&mut reader, TxIn::read)?;
         let vout = Vector::read(&mut reader, TxOut::read)?;
         let lock_time = reader.read_u32::<LittleEndian>()?;
@@ -195,10 +200,6 @@ impl Transaction {
             0
         };
 
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidInput,
-            "BIG OOF",
-        ));
 
         let (value_balance, shielded_spends, shielded_outputs) = if is_sapling_v4 {
             let vb = {
