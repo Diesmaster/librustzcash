@@ -162,11 +162,6 @@ impl Transaction {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidInput,
-            "BIG OOF",
-        ));
-
 
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
@@ -199,6 +194,11 @@ impl Transaction {
         } else {
             0
         };
+
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "BIG OOF",
+        ));
 
         let (value_balance, shielded_spends, shielded_outputs) = if is_sapling_v4 {
             let vb = {
