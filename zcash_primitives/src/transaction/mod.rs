@@ -188,10 +188,10 @@ impl Transaction {
 
 
         let vin = Vector::read(&mut reader, TxIn::read)?;
-        reader.seek(SeekFrom::Start(0))?;
-        
+        //reader.seek(SeekFrom::Start(0))?;
+
         let vout = Vector::read(&mut reader, TxOut::read)?;
-        reader.seek(SeekFrom::Start(0))?;
+        //reader.seek(SeekFrom::Start(0))?;
 
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
