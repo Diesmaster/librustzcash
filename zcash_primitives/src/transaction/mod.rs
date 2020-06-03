@@ -187,16 +187,17 @@ impl Transaction {
         }
 
 
-        let vin = Vector::read(&mut reader, TxIn::read)?;
-        //reader.seek(SeekFrom::Start(0))?;
-
-        let vout = Vector::read(&mut reader, TxOut::read)?;
+        //let vin = Vector::read(&mut reader, TxIn::read)?;
+        let vin = Vector::read(&mut reader, |r| {})?;
         //reader.seek(SeekFrom::Start(0))?;
 
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
             "BIG OOF",
         ));
+
+        let vout = Vector::read(&mut reader, |r| {})?;
+        //reader.seek(SeekFrom::Start(0))?;
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
         let expiry_height = if is_overwinter_v3 || is_sapling_v4 {
