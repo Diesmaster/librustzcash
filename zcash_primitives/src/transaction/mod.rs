@@ -4,7 +4,7 @@ use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use hex;
 use sha2::{Digest, Sha256};
 use std::fmt;
-use std::io::{self, Read, Write};
+use std::io::{self, Read, Write, SeekFrom};
 use std::ops::Deref;
 
 use crate::redjubjub::Signature;
@@ -186,13 +186,18 @@ impl Transaction {
             ));
         }
 
+
+        let vin = Vector::read(&mut reader, TxIn::read)?;
+        reader.seek(SeekFrom::Start(0))?;
+        
+        let vout = Vector::read(&mut reader, TxOut::read)?;
+        reader.seek(SeekFrom::Start(0))?;
+
         return Err(io::Error::new(
             io::ErrorKind::InvalidInput,
             "BIG OOF",
         ));
 
-        let vin = Vector::read(&mut reader, TxIn::read)?;
-        let vout = Vector::read(&mut reader, TxOut::read)?;
         let lock_time = reader.read_u32::<LittleEndian>()?;
         let expiry_height = if is_overwinter_v3 || is_sapling_v4 {
             reader.read_u32::<LittleEndian>()?
