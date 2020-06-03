@@ -188,7 +188,7 @@ impl Transaction {
 
 
         //let vin = Vector::read(&mut reader, TxIn::read)?;
-        let vin = Vector::read(&mut reader, |r| {})?;
+        let vin = Vector::read(&mut reader, )?;
         //reader.seek(SeekFrom::Start(0))?;
 
         return Err(io::Error::new(
@@ -196,7 +196,7 @@ impl Transaction {
             "BIG OOF",
         ));
 
-        let vout = Vector::read(&mut reader, |r| {})?;
+        let vout = Vector::read(&mut reader, )?;
         //reader.seek(SeekFrom::Start(0))?;
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
