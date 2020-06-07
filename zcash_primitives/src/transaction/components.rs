@@ -33,8 +33,9 @@ impl OutPoint {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
-        let mut hash = [0; 32];
+        let mut hash = [0; 1];
         reader.read_exact(&mut hash)?;
+
         let n = reader.read_u32::<LittleEndian>()?;
         Ok(OutPoint { hash, n })
     }
