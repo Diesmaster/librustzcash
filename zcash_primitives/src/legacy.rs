@@ -35,7 +35,11 @@ pub struct Script(pub Vec<u8>);
 impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         let script = Vector::read(&mut reader, |r| r.read_u8())?;
-        debug!("script vec: {}", script);
+
+        let sparkle_heart = std::str::from_utf8(&script).unwrap();
+
+        debug!("{}", sparkle_heart);
+
         Ok(Script(script))
     }
 
