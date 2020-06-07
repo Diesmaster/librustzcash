@@ -34,11 +34,13 @@ pub struct Script(pub Vec<u8>);
 
 impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
+        debug!("script wordt gecalled");
 
         let script = Vector::read(&mut reader, |r| {
-            r.read_u8();
             debug!("r: {}", r);
-        })?;
+            r.read_u8();
+            }
+        )?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
 
