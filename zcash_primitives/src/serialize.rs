@@ -1,5 +1,7 @@
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
 use std::io::{self, Read, Write};
+use log::Level;
+use log::debug;
 
 const MAX_SIZE: usize = 0x02000000;
 
@@ -70,6 +72,7 @@ impl Vector {
         F: Fn(&mut R) -> io::Result<E>,
     {
         let count = CompactSize::read(&mut reader)?;
+        debug!("count: {}", count);
         (0..count).map(|_| func(&mut reader)).collect()
     }
 
