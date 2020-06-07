@@ -6,7 +6,7 @@ const MAX_SIZE: usize = 0x02000000;
 pub struct CompactSize;
 
 impl CompactSize {
-    fn read<R: Read>(mut reader: R) -> io::Result<usize> {
+    pub fn read<R: Read>(mut reader: R) -> io::Result<usize> {
         let flag = reader.read_u8()?;
         match if flag < 253 {
             Ok(flag as usize)
