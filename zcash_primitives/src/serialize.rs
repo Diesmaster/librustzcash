@@ -3,7 +3,7 @@ use std::io::{self, Read, Write};
 
 const MAX_SIZE: usize = 0x02000000;
 
-struct CompactSize;
+pub struct CompactSize;
 
 impl CompactSize {
     fn read<R: Read>(mut reader: R) -> io::Result<usize> {
