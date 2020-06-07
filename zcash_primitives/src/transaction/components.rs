@@ -10,6 +10,9 @@ use crate::legacy::Script;
 use crate::redjubjub::{PublicKey, Signature};
 use crate::JUBJUB;
 
+use log::Level;
+use log::debug;
+
 pub mod amount;
 pub use self::amount::Amount;
 
@@ -33,8 +36,10 @@ impl OutPoint {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
-        let mut hash = [0; 1];
+        let mut hash = [0; 32];
         reader.read_exact(&mut hash)?;
+
+        debug!("{}", hash);
 
         let n = reader.read_u32::<LittleEndian>()?;
         Ok(OutPoint { hash, n })
