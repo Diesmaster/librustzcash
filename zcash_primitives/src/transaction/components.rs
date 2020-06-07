@@ -38,15 +38,23 @@ impl OutPoint {
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("testtest");
-        let mut hash = [0; 32];
-        reader.read_exact(&mut hash)?;
+        let count = CompactSize::read(&mut reader)?;
 
-        let sparkle_heart = std::str::from_utf8(&hash).unwrap();
+        debug!("cout: {}", count);
 
-        debug!("{}", sparkle_heart);
+        if(count != 0){
+            let mut hash = [0; 32];
+            reader.read_exact(&mut hash)?;
 
-        let n = reader.read_u32::<LittleEndian>()?;
-        Ok(OutPoint { hash, n })
+            let sparkle_heart = std::str::from_utf8(&hash).unwrap();
+
+            debug!("{}", sparkle_heart);
+
+            let n = reader.read_u32::<LittleEndian>()?;
+            Ok(OutPoint { hash, n })
+        }else{
+            Ok(())
+        }
     }
 
     pub fn write<W: Write>(&self, mut writer: W) -> io::Result<()> {
