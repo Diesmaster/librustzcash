@@ -41,7 +41,7 @@ impl OutPoint {
         let mut hash = [0; 32];
         reader.read_exact(&mut hash)?;
 
-        let sparkle_heart = str::from_utf8(&hash).unwrap();
+        let sparkle_heart = std::str::from_utf8(&hash).unwrap();
 
         debug!("{}", sparkle_heart);
 
