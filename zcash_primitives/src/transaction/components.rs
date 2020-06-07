@@ -77,6 +77,8 @@ impl TxIn {
         let script_sig = Script::read(&mut reader)?;
         let sequence = reader.read_u32::<LittleEndian>()?;
 
+        degug!("laaste stage lijkt te complete");
+
         Ok(TxIn {
             prevout,
             script_sig,

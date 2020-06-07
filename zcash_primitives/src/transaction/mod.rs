@@ -196,12 +196,11 @@ impl Transaction {
 
         let vin = Vector::read(&mut reader, TxIn::read)?;
 
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidInput,
-            "vin is causing the error",
-        ));
+        debug!("Vin geslaagd");
 
         let vout = Vector::read(&mut reader, TxOut::read)?;
+
+        debug!("Vout geslaagd");
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
         let expiry_height = if is_overwinter_v3 || is_sapling_v4 {
@@ -209,6 +208,8 @@ impl Transaction {
         } else {
             0
         };
+
+        debug!("expirary height and locktime geslaad");
 
         let (value_balance, shielded_spends, shielded_outputs) = if is_sapling_v4 {
             let vb = {
@@ -223,6 +224,8 @@ impl Transaction {
         } else {
             (Amount::zero(), vec![], vec![])
         };
+
+        debug!("tx geslaagd");
 
         let (joinsplits, joinsplit_pubkey, joinsplit_sig) = if version >= 2 {
             let jss = Vector::read(&mut reader, |r| {
@@ -242,6 +245,8 @@ impl Transaction {
             (vec![], None, None)
         };
 
+        debug!("Extra shit geslaagd");
+
         let binding_sig =
             if is_sapling_v4 && !(shielded_spends.is_empty() && shielded_outputs.is_empty()) {
                 Some(Signature::read(&mut reader)?)
@@ -249,6 +254,8 @@ impl Transaction {
                 None
             };
 
+        debug!("binding sig geslaagd");
+        
         Transaction::from_data(TransactionData {
             overwintered,
             version,

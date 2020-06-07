@@ -4,6 +4,9 @@ use byteorder::{ReadBytesExt, WriteBytesExt};
 use std::io::{self, Read, Write};
 use std::ops::Shl;
 
+use log::Level;
+use log::debug;
+
 use crate::serialize::Vector;
 
 /// Minimal subset of script opcodes.
@@ -32,6 +35,7 @@ pub struct Script(pub Vec<u8>);
 impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         let script = Vector::read(&mut reader, |r| r.read_u8())?;
+        debug!("script vec: {}", script);
         Ok(Script(script))
     }
 
