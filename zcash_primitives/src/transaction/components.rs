@@ -36,10 +36,13 @@ impl OutPoint {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
+        debug!("testtest");
         let mut hash = [0; 32];
         reader.read_exact(&mut hash)?;
 
-        debug!("{}", hash);
+        let sparkle_heart = str::from_utf8(&hash).unwrap();
+
+        debug!("{}", sparkle_heart);
 
         let n = reader.read_u32::<LittleEndian>()?;
         Ok(OutPoint { hash, n })

@@ -7,8 +7,13 @@ use std::fmt;
 use std::io::{self, Read, Write};
 use std::ops::Deref;
 
+use log::Level;
+use log::debug;
+
 use crate::redjubjub::Signature;
 use crate::serialize::Vector;
+
+
 
 pub mod builder;
 pub mod components;
@@ -162,6 +167,8 @@ impl Transaction {
     }
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
+
+        debug!("dit gebeurt als eerste");
 
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
