@@ -12,6 +12,7 @@ use crate::JUBJUB;
 
 use log::Level;
 use log::debug;
+use std::str;
 
 pub mod amount;
 pub use self::amount::Amount;
