@@ -13,6 +13,7 @@ use crate::JUBJUB;
 use log::Level;
 use log::debug;
 use std::str;
+use crate::serialize::CompactSize;
 
 pub mod amount;
 pub use self::amount::Amount;
@@ -42,7 +43,6 @@ impl OutPoint {
 
         debug!("cout: {}", count);
 
-        if(count != 0){
             let mut hash = [0; 32];
             reader.read_exact(&mut hash)?;
 
@@ -52,9 +52,6 @@ impl OutPoint {
 
             let n = reader.read_u32::<LittleEndian>()?;
             Ok(OutPoint { hash, n })
-        }else{
-            Ok(())
-        }
     }
 
     pub fn write<W: Write>(&self, mut writer: W) -> io::Result<()> {
