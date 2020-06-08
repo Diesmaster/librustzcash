@@ -41,13 +41,9 @@ impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("script wordt gecalled");
 
-        let script = Vector::read(&mut reader, |r| {
-            //let test = r.position();
+        let script = Vector::read(&mut reader, |&r| {
             debug!("ja");
-
-            let mut buffer = [0; 10];
-
-            r.read_exact(&mut buffer).unwrap()
+            r.read_u8()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
