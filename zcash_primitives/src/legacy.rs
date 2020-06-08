@@ -42,7 +42,7 @@ impl Script {
         debug!("script wordt gecalled");
 
         let script = Vector::read(&mut reader, |r| {
-            debug!("ja");
+            debug!("ja {}", r);
             //cursor.set_position(0);
             let mut buff = Cursor::new(r);
 
