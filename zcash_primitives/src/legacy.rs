@@ -44,7 +44,7 @@ impl Script {
 
 
 
-        let script = Vector::read(&mut reader, onRead)?;
+        let script = Vector::read(&mut reader, Script::onRead)?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
 
@@ -53,7 +53,7 @@ impl Script {
         Ok(Script(script))
     }
 
-    pub fn onRead(mut reader: &mut R) -> u8{
+    pub fn onRead<R: Read>(mut reader: &mut R) -> u8{
         debug!("test test");
         reader.read_u8
     }
