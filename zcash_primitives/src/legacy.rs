@@ -40,7 +40,7 @@ impl Script {
 
         let script = Vector::read(&mut reader, |r| {
             debug!("ja");
-            let supaR = Cursor::new(r);
+            let mut supaR = Cursor::new(r);
             supaR.read_u8()
         })?;
 
