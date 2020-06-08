@@ -40,9 +40,11 @@ pub struct Script(pub Vec<u8>);
 impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("script wordt gecalled");
-        let mut buff = Cursor::new(reader);
+        //let mut buff = Cursor::new(reader);
 
-        let script = Vector::read(&mut buff, |r| {
+        reader.seek(SeekFrom::Start(42))?;
+
+        let script = Vector::read(&mut reader, |r| {
             debug!("ja");
             //cursor.set_position(0);
             //let mut buff = Cursor::new(r);
