@@ -13,6 +13,7 @@ use log::Level;
 use log::debug;
 
 use crate::serialize::Vector;
+use crate::serialize::CompactSize;
 
 /// Minimal subset of script opcodes.
 enum OpCode {
@@ -55,9 +56,9 @@ impl Script {
 
     pub fn onRead<R: Read>(mut reader: &mut R) -> io::Result<u8>{
         debug!("test test");
-        let test = reader.usize();
+        let test = CompactSize::read(&mut reader)?;
         debug!("test: {}", test);
-        
+
         reader.read_u8()
     }
 
