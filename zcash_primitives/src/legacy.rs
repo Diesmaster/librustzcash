@@ -55,11 +55,10 @@ impl Script {
 
     pub fn onRead<R: Read>(mut reader: &mut R) -> io::Result<u8>{
         debug!("test test");
-        let count = CompactSize::read(&mut reader)?;
-        if(count != 0){
-            reader.read_u8()
-        }
-        Result(Ok(0))
+        let test = reader.usize();
+        debug!("test: {}", test);
+        
+        reader.read_u8()
     }
 
     pub fn write<W: Write>(&self, mut writer: W) -> io::Result<()> {
