@@ -1,7 +1,6 @@
 //! Support for legacy transparent addresses and scripts.
 
 use byteorder::{ReadBytesExt, WriteBytesExt};
-use ByteBuffer::from_bytes;
 
 use std::io::Cursor;
 use std::io::SeekFrom;
@@ -47,9 +46,7 @@ impl Script {
             //r.seek(SeekFrom::Start(0));
             //cursor
 
-            let mut buffer = ByteBuffer::from_bytes(&r);
-            //let value = buffer.read_u8(); //Value contains 1
-            buffer.read_u8()
+            r.read_u8::<LittleEndian>()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
