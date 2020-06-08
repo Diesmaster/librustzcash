@@ -42,11 +42,9 @@ impl Script {
         debug!("script wordt gecalled");
 
         let script = Vector::read(&mut reader, |r| {
-            debug!("ja");
-            //r.seek(SeekFrom::Start(0));
-            //cursor
-
-            r.read_u8::<LittleEndian>()
+            let test = r.position();
+            debug!("ja {}", test);
+            r.read_u8()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
