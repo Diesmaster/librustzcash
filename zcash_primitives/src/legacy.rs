@@ -42,21 +42,20 @@ impl Script {
         debug!("script wordt gecalled");
         //let mut buff = Cursor::new(reader);
 
-        reader.seek(SeekFrom::Start(42))?;
 
-        let script = Vector::read(&mut reader, |r| {
-            debug!("ja");
-            //cursor.set_position(0);
-            //let mut buff = Cursor::new(r);
 
-            r.read_u8()
-        })?;
+        let script = Vector::read(&mut reader, onRead)?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
 
         debug!("{}", sparkle_heart);
 
         Ok(Script(script))
+    }
+
+    pub fn onRead(mut reader: &mut R) -> u8{
+        debug!("test test");
+        reader.read_u8
     }
 
     pub fn write<W: Write>(&self, mut writer: W) -> io::Result<()> {
