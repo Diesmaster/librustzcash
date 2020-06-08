@@ -41,8 +41,12 @@ impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("script wordt gecalled");
 
-        let script = Vector::read(&mut reader, |&r| {
-            debug!("ja");
+        let script = Vector::read(&mut reader, |r| {
+            let test = std::str::from_utf8(&r).unwrap();
+
+            debug!("ja, {}", test);
+
+
             r.read_u8()
         })?;
 
