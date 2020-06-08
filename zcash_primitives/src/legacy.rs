@@ -46,7 +46,7 @@ impl Script {
             //cursor.set_position(0);
             let mut buff = Cursor::new(r);
 
-            buff.read_u8()
+            (&buff).read_u8()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
