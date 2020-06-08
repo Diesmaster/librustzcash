@@ -47,7 +47,7 @@ impl Script {
 
             let mut buffer = [0; 10];
 
-            r.read_exact(&mut buffer)?
+            r.read_exact(&mut buffer).unwrap()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
