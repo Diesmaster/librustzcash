@@ -42,11 +42,8 @@ impl Script {
         debug!("script wordt gecalled");
 
         let script = Vector::read(&mut reader, |r| {
-            let test = std::str::from_utf8(&r).unwrap();
-
-            debug!("ja, {}", test);
-
-
+            debug!("ja");
+            cursor.set_position(0);
             r.read_u8()
         })?;
 
