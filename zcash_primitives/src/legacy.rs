@@ -1,6 +1,8 @@
 //! Support for legacy transparent addresses and scripts.
 
 use byteorder::{ReadBytesExt, WriteBytesExt};
+use std::io::Cursor;
+
 use std::io::{self, Read, Write};
 use std::ops::Shl;
 
@@ -38,7 +40,8 @@ impl Script {
 
         let script = Vector::read(&mut reader, |r| {
             debug!("ja");
-            r.read_u8()
+            let supaR = Cursor::new(r);
+            supaR.read_u8()
         })?;
 
         let sparkle_heart = std::str::from_utf8(&script).unwrap();
