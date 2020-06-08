@@ -55,7 +55,9 @@ impl Script {
 
     pub fn onRead<R: Read>(mut reader: &mut R) -> io::Result<u8>{
         debug!("test test");
-        reader.read_u8()
+        let stonks = reader.read_u8();
+        debug!("stonks:, {}", stonks.unwrap());
+        stonks
     }
 
     pub fn write<W: Write>(&self, mut writer: W) -> io::Result<()> {
