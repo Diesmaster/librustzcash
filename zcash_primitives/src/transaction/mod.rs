@@ -169,7 +169,8 @@ impl Transaction {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
 
         let test = std::str::from_utf8(&reader).unwrap();
-        debug!("dit is de tx: {}", test);
+        let test2 = test.as_slice().to_hex();
+        debug!("dit is de tx: {}", test2);
 
         //debug!("dit gebeurt als eerste");
 
