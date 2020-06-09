@@ -168,7 +168,10 @@ impl Transaction {
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
 
-        debug!("dit gebeurt als eerste");
+        let test = std::str::from_utf8(&reader).unwrap();
+        debug!("tx: {}", test);
+
+        //debug!("dit gebeurt als eerste");
 
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
@@ -255,7 +258,7 @@ impl Transaction {
             };
 
         debug!("binding sig geslaagd");
-        
+
         Transaction::from_data(TransactionData {
             overwintered,
             version,
