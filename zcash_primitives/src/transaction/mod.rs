@@ -169,7 +169,7 @@ impl Transaction {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
 
         let test = std::str::from_utf8(&reader).unwrap();
-        debug!("tx: {}", test);
+        debug!("dit is de tx: {}", test);
 
         //debug!("dit gebeurt als eerste");
 
