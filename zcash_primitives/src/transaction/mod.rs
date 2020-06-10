@@ -193,7 +193,6 @@ impl Transaction {
             ));
         }
 
-
         let vin = Vector::read(&mut reader, TxIn::read)?;
 
         debug!("Vin geslaagd");

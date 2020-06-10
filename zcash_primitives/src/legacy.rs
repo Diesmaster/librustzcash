@@ -47,9 +47,9 @@ impl Script {
 
         let script = Vector::read(&mut reader, Script::onRead)?;
 
-        let printScript = std::str::from_utf8(&script).unwrap();
+        //let printScript = std::str::from_utf8(&script).unwrap();
 
-        debug!("{}", printScript);
+        //debug!("{}", printScript);
 
         Ok(Script(script))
     }

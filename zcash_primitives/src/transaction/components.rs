@@ -39,9 +39,6 @@ impl OutPoint {
 
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("testtest");
-        let count = CompactSize::read(&mut reader)?;
-
-        debug!("cout: {}", count);
 
             let mut hash = [0; 32];
             reader.read_exact(&mut hash)?;
