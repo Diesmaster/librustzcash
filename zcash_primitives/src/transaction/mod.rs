@@ -170,6 +170,8 @@ impl Transaction {
 
         //debug!("dit gebeurt als eerste");
 
+
+
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
         let version = header & 0x7FFFFFFF;
@@ -193,13 +195,15 @@ impl Transaction {
             ));
         }
 
-        let vin = Vector::read(&mut reader, TxIn::read)?;
 
-        debug!("Vin geslaagd");
 
         let vout = Vector::read(&mut reader, TxOut::read)?;
 
         debug!("Vout geslaagd");
+
+        let vin = Vector::read(&mut reader, TxIn::read)?;
+
+        debug!("Vin geslaagd");
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
         let expiry_height = if is_overwinter_v3 || is_sapling_v4 {

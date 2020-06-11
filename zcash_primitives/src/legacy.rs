@@ -41,22 +41,11 @@ pub struct Script(pub Vec<u8>);
 impl Script {
     pub fn read<R: Read>(mut reader: R) -> io::Result<Self> {
         debug!("script wordt gecalled");
-        //let mut buff = Cursor::new(reader);
-
-
-
         let script = Vector::read(&mut reader, Script::onRead)?;
-
-        //let printScript = std::str::from_utf8(&script).unwrap();
-
-        //debug!("{}", printScript);
-
         Ok(Script(script))
     }
 
     pub fn onRead<R: Read>(mut reader: &mut R) -> io::Result<u8>{
-        debug!("test test");
-
         reader.read_u8()
     }
 
