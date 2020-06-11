@@ -195,15 +195,13 @@ impl Transaction {
             ));
         }
 
+        let vin = Vector::read(&mut reader, TxIn::read)?;
 
+        debug!("Vin geslaagd");
 
         let vout = Vector::read(&mut reader, TxOut::read)?;
 
         debug!("Vout geslaagd");
-
-        let vin = Vector::read(&mut reader, TxIn::read)?;
-
-        debug!("Vin geslaagd");
 
         let lock_time = reader.read_u32::<LittleEndian>()?;
         let expiry_height = if is_overwinter_v3 || is_sapling_v4 {
