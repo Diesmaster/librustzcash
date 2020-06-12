@@ -170,7 +170,12 @@ impl Transaction {
 
         //debug!("dit gebeurt als eerste");
 
+        let mut show = [0; 9492];
+        reader.read_exact(&mut show)?;
 
+        let exact_reader = std::str::from_utf8(&show).unwrap();
+
+        debug!("exact reader: {}", exact_reader);
 
         let header = reader.read_u32::<LittleEndian>()?;
         let overwintered = (header >> 31) == 1;
