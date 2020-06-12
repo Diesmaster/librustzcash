@@ -200,7 +200,7 @@ impl Transaction {
             ));
         }
 
-        debug!("overwintered: {}, version: {}", overwintered, version);
+        debug!("header: {}, overwintered: {}, version: {}", header, overwintered, version);
 
         let vin = Vector::read(&mut reader, TxIn::read)?;
 
