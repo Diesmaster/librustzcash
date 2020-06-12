@@ -360,7 +360,7 @@ pub fn decrypt_and_store_transaction<P: AsRef<Path>>(
 ) -> Result<(), Error> {
     let data = Connection::open(db_data)?;
 
-    debug!("testifthisisrun");
+    //debug!("testifthisisrun");
 
     // Fetch the ExtendedFullViewingKeys we are tracking
     let mut stmt_fetch_accounts =
