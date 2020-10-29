@@ -437,6 +437,14 @@ pub fn decrypt_and_store_transaction<P: AsRef<Path>>(
         if output.outgoing {
             let to_str = RecipientAddress::from(output.to).to_string();
 
+             let s = match str::from_utf8(output.memo.as_bytes()) {
+                Ok(v) => v,
+                Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
+            };
+
+            debug!("result: {}", s);
+         
+            
             // Try updating an existing sent note.
             if stmt_update_sent_note.execute(&[
                 account.to_sql()?,
