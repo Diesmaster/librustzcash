@@ -435,8 +435,7 @@ pub fn decrypt_and_store_transaction<P: AsRef<Path>>(
         let value = output.note.value as i64;
 
         if output.outgoing {
-            let to_
-            = RecipientAddress::from(output.to).to_string();
+            let to_str = RecipientAddress::from(output.to).to_string();
 
              let s = match std::str::from_utf8(output.memo.as_bytes()) {
                 Ok(v) => v,
