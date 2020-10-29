@@ -442,7 +442,7 @@ pub fn decrypt_and_store_transaction<P: AsRef<Path>>(
                 Err(e) => panic!("Invalid UTF-8 sequence: {}", e),
             };
 
-            debug!("result: {}", s);
+            println!("result: {}", s);
          
             
             // Try updating an existing sent note.
